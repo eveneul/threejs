@@ -26,9 +26,14 @@ if (WEBGL.isWebGLAvailable()) {
   const torusGeometry4 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
   const torusGeometry5 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
 
-  const meterial = new THREE.MeshBasicMaterial({ color: '#ff7f00' })
+  const meterial = new THREE.MeshStandardMaterial({ color: '#ff7f00' })
+  const meteria2 = new THREE.MeshPhysicalMaterial({
+    color: '#ff7f00',
+    clearcoat: 1,
+    clearcoatRoughness: 0.3,
+  })
   const toru1 = new THREE.Mesh(torusGeometry1, meterial)
-  const toru2 = new THREE.Mesh(torusGeometry2, meterial)
+  const toru2 = new THREE.Mesh(torusGeometry2, meteria2)
   const toru3 = new THREE.Mesh(torusGeometry3, meterial)
   const toru4 = new THREE.Mesh(torusGeometry4, meterial)
   const toru5 = new THREE.Mesh(torusGeometry5, meterial)
