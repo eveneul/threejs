@@ -13,11 +13,9 @@ if (WEBGL.isWebGLAvailable()) {
     0.1,
     1000
   )
-  // fov: 화각, aspect: 종횡비
 
-  /* 기존에 있는 canvas 태그와 연결 */
   const canvas = document.getElementById('canvas')
-  const renderer = new THREE.WebGLRenderer({ canvas })
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
   renderer.setSize(window.innerWidth, window.innerHeight)
 
   // material
@@ -30,8 +28,6 @@ if (WEBGL.isWebGLAvailable()) {
   scene.add(cube)
   camera.position.z = 3
 
-  // renderer.render(camera, scene)
-
   // 애니메이션화 적용
   function render(time) {
     time *= 0.001
@@ -41,6 +37,18 @@ if (WEBGL.isWebGLAvailable()) {
     requestAnimationFrame(render)
   }
   requestAnimationFrame(render)
+
+  // 반응형처리
+
+  function handleResize() {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    // 변경된 카메라값 업데이트, 카메라 속성 변경 후 반드시 호출
+
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  }
+
+  window.addEventListener('resize', handleResize)
 } else {
   var warning = WEBGL.getWebGLErrorMessage()
   document.body.appendChild(warning)
