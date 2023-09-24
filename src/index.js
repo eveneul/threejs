@@ -18,13 +18,19 @@ if (WEBGL.isWebGLAvailable()) {
   /* 기존에 있는 canvas 태그와 연결 */
   const canvas = document.getElementById('canvas')
   const renderer = new THREE.WebGLRenderer({ canvas })
+  renderer.setSize(window.innerWidth, window.innerHeight)
 
-  /*  HTML과 연결시켜 주기 */
-  // document.body.appendChild(renderer.domElement)
-  // renderer.render(scene, camera)
+  // material
 
-  //렌더러 추가
-  renderer.setSize(window.innerWidth, window.innerHeight) // 렌더러 사이즈는 화면에 꽉 차게
+  const geometry = new THREE.BoxGeometry(1, 1, 1) // 도형 생성
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x999999,
+  })
+  const cube = new THREE.Mesh(geometry, material)
+  scene.add(cube)
+  camera.position.z = 3
+
+  // renderer.render(camera, scene)
 
   // 애니메이션화 적용
   function render(time) {
