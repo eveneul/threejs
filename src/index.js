@@ -18,21 +18,37 @@ if (WEBGL.isWebGLAvailable()) {
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
   renderer.setSize(window.innerWidth, window.innerHeight)
 
-  // material
+  // 도넛 생성
 
-  const geometry = new THREE.BoxGeometry(1, 1, 1) // 도형 생성
-  const material = new THREE.MeshStandardMaterial({
-    color: 0x999999,
-  })
-  const cube = new THREE.Mesh(geometry, material)
-  scene.add(cube)
+  const torusGeometry1 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
+  const torusGeometry2 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
+  const torusGeometry3 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
+  const torusGeometry4 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
+  const torusGeometry5 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
+
+  const meterial = new THREE.MeshBasicMaterial({ color: '#ff7f00' })
+  const toru1 = new THREE.Mesh(torusGeometry1, meterial)
+  const toru2 = new THREE.Mesh(torusGeometry2, meterial)
+  const toru3 = new THREE.Mesh(torusGeometry3, meterial)
+  const toru4 = new THREE.Mesh(torusGeometry4, meterial)
+  const toru5 = new THREE.Mesh(torusGeometry5, meterial)
   camera.position.z = 3
+
+  toru1.position.x = -2
+  toru2.position.x = -1
+  toru3.position.x = 0
+  toru4.position.x = 1
+  toru5.position.x = 2
+
+  // light
+  const pointLight = new THREE.PointLight('#fff', 1)
+  pointLight.position.set(0, 2, 12)
+
+  scene.add(toru1, toru2, toru3, toru4, toru5, pointLight)
 
   // 애니메이션화 적용
   function render(time) {
     time *= 0.001
-    cube.rotation.x = time
-    cube.rotation.y = time
     renderer.render(scene, camera)
     requestAnimationFrame(render)
   }
