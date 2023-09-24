@@ -35,6 +35,8 @@ if (WEBGL.isWebGLAvailable()) {
   // 애니메이션화 적용
   function render(time) {
     time *= 0.001
+    cube.rotation.x = time
+    cube.rotation.y = time
     renderer.render(scene, camera)
     requestAnimationFrame(render)
   }
