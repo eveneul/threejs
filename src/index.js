@@ -13,6 +13,15 @@ if (WEBGL.isWebGLAvailable()) {
     0.1,
     1000
   )
+  camera.position.set(10, 2, 3)
+
+  // 카메라가 어디에 있든 물체를 바라보게 하는 방법
+  camera.lookAt(new THREE.Vector3(0, 0, 0))
+
+  /*
+  fov: 시야각, 화각 (표준 사람의 시야로 보려면 45, 확대 하려면 망원렌즈 (fov 28 이하), 축소하려면 광각렌즈 (fov 63 이상))
+  
+  */
 
   const canvas = document.getElementById('canvas')
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
@@ -73,7 +82,6 @@ if (WEBGL.isWebGLAvailable()) {
   pointLight.position.set(0, 2, 12)
 
   scene.add(obj01, obj02, obj03, obj04, pointLight)
-  camera.position.z = 3
 
   // 애니메이션화 적용
   function render(time) {
